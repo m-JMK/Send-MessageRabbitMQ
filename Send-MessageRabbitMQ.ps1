@@ -2,11 +2,13 @@
 #http://ramblingcookiemonster.github.io/RabbitMQ-Intro/
 <#
 $RabbitMQCred = Get-Credential -Message "Account for Rabbit MQ Server" -UserName "Collab_Admin"
-$RabbitMQCred | Select Username,@{Name="Password";Expression = {$_.password | ConvertFrom-SecureString}} | ConvertTo-Json | Out-File .\testcredentials.json #>
+$RabbitMQCred | Select Username,@{Name="Password";Expression = {$_.password | ConvertFrom-SecureString}} | ConvertTo-Json | Out-File .\testcredentials.json 
+#>
 
 #Define a default RabbitMq server and get a credential to use
 Set-RabbitMqConfig -ComputerName 'computer.contoso.com'
 
+#Retrieve credentials from json file
 $in = Get-Content -Path '.\testcredentials.json' | Out-String | ConvertFrom-Json
 $login = $in.Username
 $password = ConvertTo-SecureString $in.Password
