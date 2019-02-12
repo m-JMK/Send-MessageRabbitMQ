@@ -5,7 +5,7 @@ $RabbitMQCred = Get-Credential -Message "Account for Rabbit MQ Server" -UserName
 $RabbitMQCred | Select Username,@{Name="Password";Expression = {$_.password | ConvertFrom-SecureString}} | ConvertTo-Json | Out-File .\testcredentials.json #>
 
 #Define a default RabbitMq server and get a credential to use
-Set-RabbitMqConfig -ComputerName 'de0-vsiaas-1223.eu.airbus.corp'
+Set-RabbitMqConfig -ComputerName 'computer.contoso.com'
 
 $in = Get-Content -Path '.\testcredentials.json' | Out-String | ConvertFrom-Json
 $login = $in.Username
